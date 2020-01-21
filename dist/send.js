@@ -1,4 +1,10 @@
 window.onload = function (e) {
+  liff.init(data => {
+    const userId = data.context.userId;
+    const target = document.getElementById('username')
+    target.innerText = userId
+    });
+
   document.getElementById('send').addEventListener('click', function () {
     const ms = document.getElementById('ms').innerText;
     const json = JSON.parse(ms)
