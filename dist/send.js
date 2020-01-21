@@ -13,9 +13,8 @@ window.onload = function (e) {
       target.innerText = 'User'
     }
     });
-
   document.getElementById('send').addEventListener('click', function () {
-    const sendTo = document.getElementById('username').innerText;
+    const sendTo = document.getElementById('username').innerText || 'user';
     const ms = document.getElementById('ms').innerText;
     const json = JSON.parse(ms)
     if (json[5] == "JPY") {
