@@ -13,8 +13,7 @@ window.onload = function (e) {
             const response = JSON.parse(xmlhttp.responseText)
             const rates = response.rates
             json.push(Math.round(json[2] / rates[json[5]] * rates["JPY"]))
-            const test = JSON.stringify(json)
-            sendLine(`${test[0]},${test[1]},${test[2]},${test[3]},${test[4]},${test[5]},${test[6]}`)
+            sendLine(JSON.stringify(json))
           }
           else if (xmlhttp.status == 400) {
             alert('There was an error 400');
