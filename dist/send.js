@@ -1,16 +1,26 @@
+const kento_line_id = 'Uaa32147adb55676f74c086ef1bebae87';
+const yuyu_line_id = 'U113cc56d8318519d565c6a9f04bb1a41';
+
 window.onload = function (e) {
   liff.init(data => {
     const userId = data.context.userId;
     const target = document.getElementById('username')
-    target.innerText = userId
+    if (userId == kento_line_id) {
+      target.innerText = 'Kento'
+    } else if (userId == yuyu_line_id) {
+      target.innerText = 'Yuyu'
+    } else {
+      target.innerText = 'User'
+    }
     });
 
   document.getElementById('send').addEventListener('click', function () {
+    const sendTo = document.getElementById('username').innerText;
     const ms = document.getElementById('ms').innerText;
     const json = JSON.parse(ms)
     if (json[5] == "JPY") {
       json.push(json[2])
-      sendLine(`${json[0]}\n${json[1]}\n${json[2]}\n${json[3]}\n${json[4]}\n${json[5]}\n${json[6]}`)
+      sendLine(`${sendTo}\n${json[0]}\n${json[1]}\n${json[2]}\n${json[3]}\n${json[4]}\n${json[5]}\n${json[6]}`)
     } else {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function () {
@@ -19,7 +29,7 @@ window.onload = function (e) {
             const response = JSON.parse(xmlhttp.responseText)
             const rates = response.rates
             json.push(Math.round(json[2] / rates[json[5]] * rates["JPY"]))
-            sendLine(`${json[0]}\n${json[1]}\n${json[2]}\n${json[3]}\n${json[4]}\n${json[5]}\n${json[6]}`)
+            sendLine(`${sendTo}\n${json[0]}\n${json[1]}\n${json[2]}\n${json[3]}\n${json[4]}\n${json[5]}\n${json[6]}`)
           }
           else if (xmlhttp.status == 400) {
             alert('There was an error 400');
