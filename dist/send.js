@@ -4,7 +4,7 @@ window.onload = function (e) {
     const json = JSON.parse(ms)
     if (json[5] == "JPY") {
       json.push(json[2])
-      sendLine(JSON.stringify(json))
+      sendLine(`${json[0]}\n${json[1]}\n${json[2]}\n${json[3]}\n${json[4]}\n${json[5]}`)
     } else {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function () {
@@ -13,7 +13,7 @@ window.onload = function (e) {
             const response = JSON.parse(xmlhttp.responseText)
             const rates = response.rates
             json.push(Math.round(json[2] / rates[json[5]] * rates["JPY"]))
-            sendLine(JSON.stringify(json))
+            sendLine(`${json[0]}\n${json[1]}\n${json[2]}\n${json[3]}\n${json[4]}\n${json[5]}`)
           }
           else if (xmlhttp.status == 400) {
             alert('There was an error 400');
